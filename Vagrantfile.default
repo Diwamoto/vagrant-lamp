@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
   # プロジェクトフォルダの共有
   # config.vm.synced_folder "../Projects", "/home/bargee/Projects", :mount_options => ['dmode=777','fmode=777']
   # Diwamoto/docker-lampの共有
-  # config.vm.synced_folder "../docker-lamp", "/home/bargee/docker-lamp", :mount_options => ['dmode=777','fmode=777']
+  config.vm.synced_folder "./docker-lamp", "/home/bargee/docker-lamp", :mount_options => ['dmode=777','fmode=777']
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
   end
   #
   # View the documentation for the provider you are using for more
@@ -73,12 +73,18 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    # vimとgitのinstall
     sudo pkg install vim
     sudo pkg install git
+    # dockerのupdate
     sudo /etc/init.d/docker restart v1.12.6
+    # docker-composeのinstall
     wget -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m`
     chmod +x docker-compose-`uname -s`-`uname -m`
     sudo mv docker-compose-`uname -s`-`uname -m` /usr/bin/docker-compose
     sudo chown root:root /usr/bin/docker-compose
+    # docker-lampの起動
+    cd docker-lamp
+    docker-compose up -d
   SHELL
 end
