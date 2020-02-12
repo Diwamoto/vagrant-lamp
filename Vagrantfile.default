@@ -28,9 +28,9 @@ Vagrant.configure("2") do |config|
   # mysql
   config.vm.network "forwarded_port", guest: 3306, host: 3306
   # mail
-  config.vm.network "forwarded_port", guest: 1080, host: 1080
+  # config.vm.network "forwarded_port", guest: 1080, host: 1080
   # pma
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # config.vm.network "forwarded_port", guest: 8080, host: 8080
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
@@ -49,10 +49,12 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
+  
+  
   # プロジェクトフォルダの共有
   # config.vm.synced_folder "../Projects", "/home/bargee/Projects", :mount_options => ['dmode=777','fmode=777']
   # Diwamoto/docker-lampの共有
-  config.vm.synced_folder "./docker-lamp", "/home/bargee/docker-lamp", :mount_options => ['dmode=777','fmode=777']
+  # config.vm.synced_folder "./docker-lamp", "/home/bargee/docker-lamp", :mount_options => ['dmode=777','fmode=777']
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -64,6 +66,9 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:
     vb.memory = "4096"
+  # vb.cpus = 2
+    # I/O APICの有効化
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
   end
   #
   # View the documentation for the provider you are using for more
@@ -83,8 +88,5 @@ Vagrant.configure("2") do |config|
     chmod +x docker-compose-`uname -s`-`uname -m`
     sudo mv docker-compose-`uname -s`-`uname -m` /usr/bin/docker-compose
     sudo chown root:root /usr/bin/docker-compose
-    # docker-lampの起動
-    cd docker-lamp
-    docker-compose up -d
   SHELL
 end
