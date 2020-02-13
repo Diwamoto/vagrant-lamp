@@ -82,9 +82,9 @@ Vagrant.configure("2") do |config|
     sudo pkg install vim
     sudo pkg install git
     # dockerのupdate
-    sudo /etc/init.d/docker restart v1.12.6
+    sudo /etc/init.d/docker restart v19.03.5
     # docker-composeのinstall
-    wget -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m`
+    wget -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m`
     chmod +x docker-compose-`uname -s`-`uname -m`
     sudo mv docker-compose-`uname -s`-`uname -m` /usr/bin/docker-compose
     sudo chown root:root /usr/bin/docker-compose
