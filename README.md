@@ -11,7 +11,13 @@ Vagrantfile.defaultをVagrantfileにリネームしてください。
 他のフォルダを共有してdocker-composeを動かすのもありですね。
 
 ## Tips
+
+### docker-lampの利用
 このレポジトリにはDiwamoto/docker-lampをsubmoduleとして同梱しています。
 `git submodule update -i` `git submodule update --remote`でsubmouduleを更新して、
 完了したら`vagrant ssh`してログインし、`cd docker-lamp`、`docker-compose up -d`でdocker-lampが立ち上がります。
 mysqlのuserは`user`、passwordは`password`になっています。
+
+### sshを早くする
+`vagrant ssh`って遅いですよね。
+`vagrant ssh-config --host vagrant >> ~/.ssh/config`を実行すると`ssh vagrant`で高速でsshできます。
