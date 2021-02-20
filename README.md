@@ -1,3 +1,8 @@
+# 追記
+https://zenn.dev/diwamoto/articles/e8425c256dccd6
+でも紹介している方法を使用することに変更したのでこちらのメンテナンスは終了させていただきます。
+
+
 # vagrant-lamp
 vagrantを使ってdocker for macのファイルioが遅い問題を解決したものになります。
 イメージにはdocker用の超軽量osであるailispaw/bargeを使用しています。
